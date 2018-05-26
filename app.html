@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta http-equiv="Expires" content="Mon, 26 Jul 1997 05:00:00 GMT">
+	<meta http-equiv="Pragma" content="no-cache">
+	<title>uplane</title>	
+</head>    
+
+
+
+<body>	
+	<header>
+		<div class="logo"><img src="img/logo.svg" alt=""></div>
+		<div class="nav_info">
+			<a href="#faq" class="faq popup">FAQ</a>
+			<a href="#about" class="about popup">About</a>
+		</div>
+	</header>
+	<div id="app" class="content">
+		<div class="tabs">
+			<button v-on:click="tabswitch()" id="workspace_tab" class="workspace active_tab tab"><img src="img/icons8-web-design-64.png" alt="">Workspace</button>
+			<button v-on:click="tabswitch()" id="projects_tab" class="projects tab"><img src="img/icons8-group-of-projects-64.png" alt="">Projects</button>
+			<button v-on:click="tabswitch()" id="clients_tab" class="clients tab"><img src="img/icons8-client-management-64.png" alt="">Clients</button>
+			<button v-on:click="tabswitch()" id="tasks_tab" class="tasks tab"><img src="img/icons8-bulleted-list-64.png" alt="">Tasks</button>
+		</div>
+
+		<div v-show="workspace" id="workspace">
+			<div class="row">			
+				<div class="column">
+					<div class="tasks block">
+						<h2>Active tasks</h2>
+						<div class="container">		
+						</div>
+						<div class="nav">
+							<a href="#"  v-on:click="morelink()" id="more_tasks" class="more">More ></a>
+							<a href="#add_task" class="add popup">+</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="column">
+					<div class="tasks_stats block">
+						<h2>Tasks</h2>
+						<span class="total">
+							Total <span class="value">{{total_tasks}}</span> 
+						</span>
+						<span class="completed">
+							Completed <span class="value">{{tasks_completed}}</span>
+						</span>
+						<span class="active">
+							Active <span class="value">{{tasks_active}}</span>
+						</span>
+					</div>
+					<div class="total_clients block">
+						<h2>Clients</h2>
+						<span class="value">{{total_clients}}</span>
+					</div>
+					<div class="total_projects block">
+						<h2>Projects</h2>
+						<span class="value">{{total_projects}}</span>
+					</div>
+					<div class="total_price block">
+						<h2>Total cost</h2>
+						<span class="value">{{total_cost}}$</span>
+					</div>	
+				</div>
+
+				<div class="column">
+					<div class="projects block">
+						<h2>Projects</h2>
+						<div class="container"></div>
+						<div class="nav">
+							<a href="#" v-on:click="morelink()" id="more_projects" class="more">More ></a>
+							<a href="#add_project" class="add popup">+</a>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+
+		<div v-show="projects" id="projects">	
+
+		</div>
+
+		<div v-show="clients" id="clients">			
+		</div>
+
+		<div v-show="tasks" id="tasks">			
+		</div>
+
+	</div>
+
+	<div id="client_popup" class="mfp-hide mfp-fade">
+		<div class="client">
+			<h2>Name</h2>
+			<span class="mail"><b>mail:</b> hello@vacya.ua</span>
+			<span class="phone"><b>phone:</b> 12345678910</span>
+			<span class="source"><b>source:</b> networking</span>
+			<a href="#" v-on:click="moretasks()" class="tasks">tasks ></a>
+		</div>		
+	</div>
+
+	<div id="faq" class="mfp-hide mfp-fade">
+		<h1>FAQ</h1>
+	</div>
+
+	<div id="about" class="mfp-hide mfp-fade">
+		<h1>About</h1>
+	</div>
+
+	<div id="add_task" class="mfp-hide mfp-fade">
+		<h1>Add new task</h1>				
+		<div class="select_proj">
+			<label for="projects">Project</label>
+			<select name="projects" class="select_proj">			  
+
+			</select>	
+		</div>		
+		<div class="select_clients">
+			<label for="clients">Client</label>
+			<select name="clients" onchange="selectEvent()" class="select_clients">
+
+			</select>		
+		</div>		
+		<input type="text" class="task_name" placeholder="name">
+		<textarea placeholder="description" cols="30" rows="3"></textarea>
+		<button class="event">Add new task</button>
+		<!-- addTask: function (indexP,i,_task,desc) { -->
+	</div>
+
+	<div id="add_project" class="mfp-hide mfp-fade">	
+		<h1>Add new project</h1>
+		<input type="text" class="name" placeholder="name">
+		<input type="date" class="deadline" placeholder="deadline">
+		<input type="text" class="cost" placeholder="cost">
+		<button class="event">Add new project</button>
+		<!-- createProject: function (name,deadline,cost) -->
+	</div>
+	<a href="#transaction" class="transaction" style="position: absolute; width: 0.1px; opacity: .1"></a>	
+	<div id="transaction" class="mfp-hide mfp-fade">
+		<p>Transaction is pending</p>
+		<img src="img/pending.gif" alt="">
+		<div class="hash"></div>	
+	</div>
+
+	<div id="add_client" class="mfp-hide mfp-fade">
+		<h1>Add new client</h1>
+		<div class="select_proj">
+			<label for="projects">Project</label>
+			<select name="projects" class="select_proj">			  
+			</select>	
+		</div>		
+		<input type="text" class="name" placeholder="name">
+		<input type="text" class="phone" placeholder="phone">
+		<input type="mail" class="mail" placeholder="mail">
+		<input type="text" class="source" placeholder="source">
+		<input type="text" class="goal" placeholder="goal">
+		<button class="event">Add new client</button>
+		<!-- addClient: function (indexP,name,phone,mail,source,goal) { -->
+	</div>
+
+	<div class="noExtension" style="display: none"> 
+		NOTE: Please install <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>  to use BlackJack Nebulas or try CTRL+F5
+	</div>
+	<div class="errNetwork" style="display: none">
+		NOTE: Sorry, you use incorrect net
+	</div>	
+
+
+	<script src='lib/jquery-3.3.1.min.js'></script>
+	<link rel="stylesheet" href="lib/main.css">	
+	<script src='lib/nebPay.js'></script>    	
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src='lib/nebulas.js'></script>
+    <script src="lib/common.js"></script>    
+    <script src='lib/jquery.magnific-popup.js'></script>
+    <link rel="stylesheet" href="lib/magnific-popup.css">    
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700,900" rel="stylesheet">
+    <script>
+    $('.transaction').magnificPopup({
+		    type:'inline',
+		    fixedContentPos: true, 
+		    mainClass: 'mfp-fade',      
+		    showCloseBtn: true,
+		    closeOnBgClick: false
+		  });   
+	    $('.popup').magnificPopup({
+		    type:'inline',
+		    fixedContentPos: true, 
+		    mainClass: 'mfp-fade',      
+		    showCloseBtn: true,
+		    closeOnBgClick: true
+		  });   
+	</script>
+</body>
+</html>
