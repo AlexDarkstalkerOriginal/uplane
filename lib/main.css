@@ -625,3 +625,23 @@ b {
   left: 185px;
   top: 2px;
 }
+
+
+.deadline, .cost {
+  position: relative;
+  overflow: unset;
+}
+
+.deadline:before {
+  content: 'Project deadline: ';
+  position: absolute;
+  top: 10px;
+  left: -110px;
+}
+
+.deadline:after {
+  content: 'Project cost: ';
+  position: absolute;
+  top: 60px;
+  left: -110px;
+}
