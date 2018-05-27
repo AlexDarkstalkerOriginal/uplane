@@ -37,15 +37,14 @@
 		<div v-show="workspace" id="workspace">
 			<div class="row">			
 				<div class="column">
-					<div class="tasks block">
-						<h2>Active tasks</h2>
-						<div class="container">		
-						</div>
+					<div class="projects block">
+						<h2>Projects</h2>
+						<div class="container"></div>
 						<div class="nav">
-							<a href="#"  v-on:click="morelink()" id="more_tasks" class="more">More ></a>
-							<a href="#add_task" class="add popup">+</a>
+							<a href="#" v-on:click="morelink()" id="more_projects" class="more">More ></a>
+							<a href="#add_project" class="add popup">+</a>
 						</div>
-					</div>
+					</div>					
 				</div>
 
 				<div class="column">
@@ -76,12 +75,13 @@
 				</div>
 
 				<div class="column">
-					<div class="projects block">
-						<h2>Projects</h2>
-						<div class="container"></div>
+					<div class="tasks block">
+						<h2>Active tasks</h2>
+						<div class="container">		
+						</div>
 						<div class="nav">
-							<a href="#" v-on:click="morelink()" id="more_projects" class="more">More ></a>
-							<a href="#add_project" class="add popup">+</a>
+							<a href="#"  v-on:click="morelink()" id="more_tasks" class="more">More ></a>
+							<a href="#add_task" class="add popup">+</a>							
 						</div>
 					</div>
 				</div>
@@ -197,25 +197,12 @@
 	<script src='lib/nebPay.js'></script>    	
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src='lib/nebulas.js'></script>
-    <script src="lib/common.js"></script>    
     <script src='lib/jquery.magnific-popup.js'></script>
+    <script src="lib/common.js"></script>        
     <link rel="stylesheet" href="lib/magnific-popup.css">    
     <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,700,900" rel="stylesheet">
     <script>
-    $('.transaction').magnificPopup({
-		    type:'inline',
-		    fixedContentPos: true, 
-		    mainClass: 'mfp-fade',      
-		    showCloseBtn: true,
-		    closeOnBgClick: false
-		  });   
-	    $('.popup').magnificPopup({
-		    type:'inline',
-		    fixedContentPos: true, 
-		    mainClass: 'mfp-fade',      
-		    showCloseBtn: true,
-		    closeOnBgClick: true
-		  });   
+    
 	</script>
 </body>
 </html>
